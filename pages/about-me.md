@@ -11,7 +11,7 @@ about:
   bio: |
     Baseball — who would’ve thought?
 
-    I came into my week with the **Colorado Rockies** barely knowing the difference between a fastball and a foul. My only exposure to the game had been through YouTube clips: flashy highlights, walk-off homers, crowd noise echoing through a screen. I thought I’d seen it. I hadn’t.
+    I came into my internship week with the **Colorado Rockies** barely knowing the difference between a fastball and a foul. My only exposure to the game had been through YouTube clips: flashy highlights, walk-off homers, crowd noise echoing through a screen. I thought I’d seen it. I hadn’t.
 
     Nothing prepared me for the moment I stepped into **Coors Field.**
 
