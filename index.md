@@ -5,7 +5,7 @@ description: Student | Data Analytics, Finance & Business Strategy
 
 motto: "The only impossible journey is the one you never begin."
 
-summary: >
+summary: 
   🚀 Harnessing data, strategy, and creativity to drive real-world impact.
 
   🎓 Sophomore, CIS & Accounting @ Grambling State University  
