@@ -4,16 +4,16 @@ title: About Me
 permalink: /about-me.html
 
 about:
-  name: Wisdom Agbeve
+  name: WISDOM
   role: Sophomore, CIS + Accounting + Data Analytics @ Grambling
   image: assets/images/blahhh.jpg
   linkedin: https://www.linkedin.com/in/wisdom-agbeve/
   bio: |
     Baseball — who would’ve thought?
 
-    I came into my week with the Colorado Rockies barely knowing the difference between a fastball and a foul. My only exposure to the game had been through YouTube clips: flashy highlights, walk-off homers, crowd noise echoing through a screen. I thought I’d seen it. I hadn’t.
+    I came into my week with the **Colorado Rockies** barely knowing the difference between a fastball and a foul. My only exposure to the game had been through YouTube clips: flashy highlights, walk-off homers, crowd noise echoing through a screen. I thought I’d seen it. I hadn’t.
 
-    Nothing prepared me for the moment I stepped into Coors Field.
+    Nothing prepared me for the moment I stepped into **Coors Field.**
 
     The sun lit the stadium in gold. The air buzzed with anticipation. The crack of the bat was sharper, louder — real. Every cheer felt like a wave crashing through thousands of people at once. For the first time, I wasn’t just watching a game. I was part of it.
 
