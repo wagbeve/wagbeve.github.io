@@ -26,12 +26,22 @@ about:
     Now that the week is over, I’ve downloaded the MLB Ballpark app. Not just to track scores, but to stay connected to something I didn’t expect to love. Because baseball, like most things in life, is deeper when you see what happens off the field — and I’m not done learning.
 
   gallery:
-    - image: /assets/images/me-guitar.png
-      caption: Playing guitar at the park!
-    - image: /assets/images/me-basketball.png
-      caption: Hooping and dropping people off at the park 🏀
-    - image: /assets/images/me.jpg
-      caption: My favorite portrait of myself :)
-    - image: /assets/images/me-pi.png
-      caption: Working on a personal project w/ the Raspberry PI
+    - image: assets/images/Dinger.jpg
+      caption: Picture with Dinger ❤️!
+    - image: assets/images/coors_field.jpg
+      caption: Coors Field ⚾️🧢
+    - image: assets/images/club_house.JPG
+      caption: Rockies Club House 🥳
+    - image: assets/images/rockies.jpg
+      caption: Front seat for Los Angeles Dodgers vs. Colorado Rockies Game ⚾
+    - image: assets/images/fields.JPG
+      caption: Rockiessss 🔥
+    - image: assets/images/line_up.JPG
+      caption: Game Lineup for C.R
+    - image: assets/images/park.jpg
+      caption: My favorite photo on Coors Field :)
+    - image: assets/images/colorado rockies.JPG
+      caption: Colorado Rockies 💜
+    - image: assets/images/no_touch.JPG
+      caption: Dinger - NO TOUCH 😅
 ---
