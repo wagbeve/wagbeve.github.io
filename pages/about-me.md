@@ -25,7 +25,7 @@ about:
 
     Now that the week is over, I’ve downloaded the MLB Ballpark app. Not just to track scores, but to stay connected to something I didn’t expect to love. Because baseball, like most things in life, is deeper when you see what happens off the field — and I’m not done learning.
 
-  gallery:
+  gallery (click image to zoom in):
     - image: assets/images/Dinger.jpg
       caption: Picture with Dinger ❤️!
     - image: assets/images/coors_field.jpg
