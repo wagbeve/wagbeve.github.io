@@ -1,7 +1,7 @@
 ---
 layout: home
 title: WISDOM AGBEVE
-description: Student | Data Analytics, Finance & Business Strategy
+description: Data Analytics, Finance & Business Strategy
 
 motto: "The only impossible journey is the one you never begin."
 
