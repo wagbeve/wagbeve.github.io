@@ -5,8 +5,8 @@ permalink: /my-blog.html
 ---
 
 <div class="blog-post">
-  <h1>📚 My Research Blog</h1>
-  <p>Welcome to my daily research log for the CEAMLS SAIRI Summer 2025 program. Each entry reflects hands-on learning, challenges, and reflections.</p>
+  <h1>📚 My Daily Blog</h1>
+  <p>Welcome to my daily experience log for my Experiencership Week with the Colorado Rockies. Each entry reflects hands-on learning, challenges, and reflections.</p>
   <hr />
 
   <h2>📅 Table of Contents</h2>
