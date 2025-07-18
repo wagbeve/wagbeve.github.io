@@ -4,42 +4,72 @@ layout: default
 
 <article class="blog-post">
   <header class="post-header">
-    <p class="post-date">{{ page.date | date: "%B %-d, %Y" }}</p>
     <h1 class="post-title">{{ page.title }}</h1>
-    <p class="post-author">By {{ page.author | default: site.author }}</p>
+    {% if page.subtitle %}
+    <p class="post-author">{{ page.subtitle }}</p>
+    {% endif %}
   </header>
 
-  <section class="post-content">
-    {{ content }}
-  </section>
-
-  {% if page.what_i_learned %}
+  {% if page.project_title %}
   <section class="post-section">
-    <h3>What I Learned</h3>
-    {{ page.what_i_learned | markdownify }}
+    <h3>Project Title</h3>
+    <p>{{ page.project_title }}</p>
   </section>
   {% endif %}
 
-  {% if page.blockers %}
+  {% if page.problem %}
   <section class="post-section">
-    <h3>Blockers</h3>
-    {{ page.blockers | markdownify }}
+    <h3>Problem</h3>
+    {{ page.problem | markdownify }}
   </section>
   {% endif %}
 
-  {% if page.reflection %}
+  {% if page.approach %}
   <section class="post-section">
-    <h3>Reflection</h3>
-    {{ page.reflection | markdownify }}
+    <h3>Approach</h3>
+    {{ page.approach | markdownify }}
+  </section>
+  {% endif %}
+  
+
+  {% if page.outcome %}
+  <section class="post-section">
+    <h3>Expected Outcome</h3>
+    {{ page.outcome | markdownify }}
   </section>
   {% endif %}
 
-  {% if page.tags %}
-  <footer class="post-tags">
-    <span>Tags:</span>
-    {% for tag in page.tags %}
-      <span class="tag">{{ tag }}</span>
-    {% endfor %}
-  </footer>
+  {% if page.final_report_url %}
+  <p><strong>Final Report:</strong> <a href="{{ page.final_report_url }}" target="_blank">View PDF</a></p>
   {% endif %}
+
+
+  {% if page.grad_mentor %}
+<section class="post-section">
+  <h3>Graduate Student Mentor</h3>
+  <p>
+    {% if page.grad_mentor.linkedin %}
+      <a href="{{ page.grad_mentor.linkedin }}" target="_blank">{{ page.grad_mentor.name }}</a>
+    {% else %}
+      {{ page.grad_mentor.name }}
+    {% endif %}
+  </p>
+</section>
+{% endif %}
+
+{% if page.faculty_mentor %}
+<section class="post-section">
+  <h3>Faculty Mentor</h3>
+  <p>
+    {% if page.faculty_mentor.linkedin %}
+      <a href="{{ page.faculty_mentor.linkedin }}" target="_blank">{{ page.faculty_mentor.name }}</a>
+    {% else %}
+      {{ page.faculty_mentor.name }}
+    {% endif %}
+  </p>
+</section>
+{% endif %}
+
 </article>
+
+
