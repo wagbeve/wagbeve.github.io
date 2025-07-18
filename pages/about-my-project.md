@@ -1,11 +1,12 @@
 ---
 layout: default
 title: "About My Project"
+permalink: /about-my-project.html
 ---
 
-# About My Project
+<h1>About My Project</h1>
 
-Welcome to my project page! Click on each section to explore details.
+<p>Welcome to my project page! Click on each section to explore details.</p>
 
 <div class="project-section">
   <button class="accordion">Project Title</button>
@@ -52,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <style>
-/* Keep font consistent with your theme */
 .accordion {
   background-color: #f5f5f5;
   color: #333;
