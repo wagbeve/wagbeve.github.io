@@ -34,10 +34,20 @@ about:
       caption: Rockies Club House 🥳
     - image: assets/images/rockies.jpg
       caption: Front seat for Los Angeles Dodgers vs. Colorado Rockies Game ⚾
+    - image: assets/images/Pre-Game.jpg
+      caption: Pre-Game Warmup
     - image: assets/images/fields.JPG
       caption: Rockiessss 🔥
     - image: assets/images/IMG_3541.jpg
       caption: Time with HR Team
+    - image: assets/images/The Player.JPG
+      caption: The Player
+    - image: assets/images/Working the Ganme.jpg
+      caption: Working the Game
+    - image: assets/images/First Game Cert.jpg
+      caption: Certificate from My First Ever Baseball Game
+    - image: assets/images/Guest.jpg
+      caption: Guest with the Communications Team
     - image: assets/images/line_up.JPG
       caption: Game Lineup for C.R
     - image: assets/images/park.jpg
