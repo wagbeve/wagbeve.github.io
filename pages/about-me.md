@@ -56,6 +56,4 @@ about:
       caption: Colorado Rockies 💜
     - image: assets/images/no_touch.JPG
       caption: Dinger - NO TOUCH 😅
-    - image: assets/images/142EC8B2-CFCD-4AF0-A539-454AB8C0DE50.MP4
-      caption: Video of Coors Field
 ---
