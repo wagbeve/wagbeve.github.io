@@ -23,19 +23,13 @@ layout: default
     {% for section in sections %}
       {% assign title = section | split: "," | first | strip %}
       {% assign key = section | split: "," | last | strip %}
-      
-      {%- comment -%}
-      Debug line - remove or comment out once confirmed working:
-      <p><strong>Checking key:</strong> {{ key }} - Exists? {{ page[key] | default: 'No content' }}</p>
-      {%- endcomment -%}
-
       {% if page[key] %}
       <div class="accordion-item">
         <button class="accordion-header" aria-expanded="false" aria-controls="section-{{ forloop.index }}" id="accordion-header-{{ forloop.index }}">
           <span>{{ title }}</span>
           <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <div id="section-{{ forloop.index }}" class="accordion-content" role="region" aria-labelledby="accordion-header-{{ forloop.index }}" hidden>
+        <div id="section-{{ forloop.index }}" class="accordion-content" role="region" aria-labelledby="accordion-header-{{ forloop.index }}">
           {{ page[key] | markdownify }}
         </div>
       </div>
@@ -52,18 +46,23 @@ layout: default
     headers.forEach(header => {
       header.addEventListener('click', () => {
         const expanded = header.getAttribute('aria-expanded') === 'true';
+
         // Close all accordion items
         headers.forEach(h => {
           h.setAttribute('aria-expanded', 'false');
           const content = document.getElementById(h.getAttribute('aria-controls'));
-          if (content) content.hidden = true;
+          if (content) {
+            content.classList.remove('show');
+          }
         });
 
-        // If it was not expanded, open it
+        // Toggle clicked accordion if it was closed
         if (!expanded) {
           header.setAttribute('aria-expanded', 'true');
           const content = document.getElementById(header.getAttribute('aria-controls'));
-          if (content) content.hidden = false;
+          if (content) {
+            content.classList.add('show');
+          }
         }
       });
     });
@@ -125,26 +124,28 @@ layout: default
 
   /* Accordion content */
   .accordion-content {
-    padding: 20px 24px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-15px);
+    transition:
+      max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.4s ease 0.1s,
+      transform 0.4s ease 0.1s;
+    padding: 0 24px;
     font-size: 1rem;
     line-height: 1.6;
     color: #222;
     border-top: 1px solid #ddd;
-    animation: slideDown 0.4s ease forwards;
+    will-change: max-height, opacity, transform;
   }
 
-  /* Slide down animation */
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      max-height: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      max-height: 1000px;
-      transform: translateY(0);
-    }
+  .accordion-content.show {
+    max-height: 1000px; /* big enough to fit content */
+    opacity: 1;
+    transform: translateY(0);
+    padding: 20px 24px;
+    transition-delay: 0s;
   }
 
   /* Responsive */
