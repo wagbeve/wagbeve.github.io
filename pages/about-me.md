@@ -36,6 +36,8 @@ about:
       caption: Front seat for Los Angeles Dodgers vs. Colorado Rockies Game ⚾
     - image: assets/images/fields.JPG
       caption: Rockiessss 🔥
+    - image: assets/images/IMG_3541.jpg
+      caption: Time with HR Team
     - image: assets/images/line_up.JPG
       caption: Game Lineup for C.R
     - image: assets/images/park.jpg
