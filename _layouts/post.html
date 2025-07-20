@@ -11,85 +11,142 @@ layout: default
 
   <div class="accordion">
 
-    {% if page.departments_interacted_with %}
-    <h3 class="accordion-header">Departments Interacted With</h3>
-    <div class="accordion-content" style="display:none;">
-      {{ page.departments_interacted_with | markdownify }}
-    </div>
-    {% endif %}
+    {% assign sections = 
+      "Departments Interacted With,departments_interacted_with
+      |What I Learned,what_i_learned
+      |What Stood Out,what_stood_out
+      |Work Done,work_done
+      |Questions Raised,questions_raised
+      |Feedback & Suggestions,feedback_suggestions"
+      | split:"|" %}
 
-    {% if page.what_i_learned %}
-    <h3 class="accordion-header">What I Learned</h3>
-    <div class="accordion-content" style="display:none;">
-      {{ page.what_i_learned | markdownify }}
-    </div>
-    {% endif %}
-
-    {% if page.what_stood_out %}
-    <h3 class="accordion-header">What Stood Out</h3>
-    <div class="accordion-content" style="display:none;">
-      {{ page.what_stood_out | markdownify }}
-    </div>
-    {% endif %}
-
-    {% if page.work_done %}
-    <h3 class="accordion-header">Work Done</h3>
-    <div class="accordion-content" style="display:none;">
-      {{ page.work_done | markdownify }}
-    </div>
-    {% endif %}
-
-    {% if page.questions_raised %}
-    <h3 class="accordion-header">Questions Raised</h3>
-    <div class="accordion-content" style="display:none;">
-      {{ page.questions_raised | markdownify }}
-    </div>
-    {% endif %}
-
-    {% if page.feedback_suggestions %}
-    <h3 class="accordion-header">Feedback & Suggestions</h3>
-    <div class="accordion-content" style="display:none;">
-      {{ page.feedback_suggestions | markdownify }}
-    </div>
-    {% endif %}
+    {% for section in sections %}
+      {% assign title = section | split: "," | first %}
+      {% assign key = section | split: "," | last %}
+      {% if page[key] %}
+      <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false" aria-controls="section-{{ forloop.index }}">
+          <span>{{ title }}</span>
+          <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="section-{{ forloop.index }}" class="accordion-content" hidden>
+          {{ page[key] | markdownify }}
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
 
   </div>
 </article>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener('DOMContentLoaded', () => {
     const headers = document.querySelectorAll('.accordion-header');
+
     headers.forEach(header => {
       header.addEventListener('click', () => {
-        const content = header.nextElementSibling;
-        const isVisible = content.style.display === 'block';
-        // Close all contents
-        document.querySelectorAll('.accordion-content').forEach(c => c.style.display = 'none');
-        // Toggle current
-        content.style.display = isVisible ? 'none' : 'block';
+        const expanded = header.getAttribute('aria-expanded') === 'true';
+        // Close all
+        headers.forEach(h => {
+          h.setAttribute('aria-expanded', 'false');
+          document.getElementById(h.getAttribute('aria-controls')).hidden = true;
+        });
+
+        if (!expanded) {
+          header.setAttribute('aria-expanded', 'true');
+          document.getElementById(header.getAttribute('aria-controls')).hidden = false;
+        }
       });
     });
   });
 </script>
 
 <style>
-  .accordion-header {
-    cursor: pointer;
-    padding: 12px 20px;
-    background-color: #f2f2f2;
+  /* Accordion container */
+  .accordion {
+    max-width: 900px;
+    margin: 1.5rem auto 3rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  /* Each accordion item */
+  .accordion-item {
     border: 1px solid #ddd;
-    margin-top: 10px;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+    overflow: hidden;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease;
+  }
+  .accordion-item:hover {
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  }
+
+  /* Accordion header button */
+  .accordion-header {
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: linear-gradient(90deg, #3a86ff 0%, #8338ec 100%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     user-select: none;
-    font-weight: bold;
+    transition: background 0.3s ease;
+    border-radius: 6px;
   }
-  .accordion-header:hover {
-    background-color: #e2e2e2;
+  .accordion-header:hover,
+  .accordion-header[aria-expanded="true"] {
+    background: linear-gradient(90deg, #8338ec 0%, #3a86ff 100%);
   }
+
+  /* Accordion icon arrow */
+  .accordion-icon {
+    transition: transform 0.4s ease;
+    stroke: white;
+  }
+  .accordion-header[aria-expanded="true"] .accordion-icon {
+    transform: rotate(180deg);
+  }
+
+  /* Accordion content panel */
   .accordion-content {
-    padding: 15px 20px;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    background-color: white;
+    padding: 20px 24px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #222;
+    border-top: 1px solid #ddd;
+    animation: slideDown 0.4s ease forwards;
+  }
+
+  /* Slide down animation */
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      max-height: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      max-height: 1000px;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .accordion-header {
+      font-size: 1rem;
+      padding: 14px 20px;
+    }
+    .accordion-content {
+      padding: 16px 20px;
+      font-size: 0.95rem;
+    }
   }
 </style>
