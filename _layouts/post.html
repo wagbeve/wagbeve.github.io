@@ -23,21 +23,13 @@ layout: default
     {% for section in sections %}
       {% assign title = section | split: "," | first %}
       {% assign key = section | split: "," | last %}
-      {% if page[key] and page[key] != "" %}
+      {% if page[key] %}
       <div class="accordion-item">
-        <button 
-          class="accordion-header" 
-          aria-expanded="false" 
-          aria-controls="section-{{ forloop.index }}" 
-          id="accordion-header-{{ forloop.index }}">
+        <button class="accordion-header" aria-expanded="false" aria-controls="section-{{ forloop.index }}">
           <span>{{ title }}</span>
           <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <div 
-          id="section-{{ forloop.index }}" 
-          class="accordion-content" 
-          role="region" 
-          aria-labelledby="accordion-header-{{ forloop.index }}">
+        <div id="section-{{ forloop.index }}" class="accordion-content" hidden>
           {{ page[key] | markdownify }}
         </div>
       </div>
@@ -54,80 +46,30 @@ layout: default
     headers.forEach(header => {
       header.addEventListener('click', () => {
         const expanded = header.getAttribute('aria-expanded') === 'true';
+        // Close all
+        headers.forEach(h => {
+          h.setAttribute('aria-expanded', 'false');
+          document.getElementById(h.getAttribute('aria-controls')).hidden = true;
+        });
 
-        if (expanded) {
-          // Close current
-          header.setAttribute('aria-expanded', 'false');
-          collapseSection(document.getElementById(header.getAttribute('aria-controls')));
-        } else {
-          // Close others first
-          headers.forEach(h => {
-            h.setAttribute('aria-expanded', 'false');
-            collapseSection(document.getElementById(h.getAttribute('aria-controls')));
-          });
-
-          // Open this one
+        if (!expanded) {
           header.setAttribute('aria-expanded', 'true');
-          expandSection(document.getElementById(header.getAttribute('aria-controls')));
+          document.getElementById(header.getAttribute('aria-controls')).hidden = false;
         }
       });
     });
-
-    function collapseSection(element) {
-      // Set height to current height, then to 0 to animate closing
-      const sectionHeight = element.scrollHeight;
-      element.style.height = sectionHeight + 'px';
-
-      requestAnimationFrame(() => {
-        element.style.transition = 'height 0.35s ease, opacity 0.35s ease';
-        element.style.height = 0;
-        element.style.opacity = 0;
-      });
-
-      element.addEventListener('transitionend', function handler() {
-        element.style.display = 'none';
-        element.style.removeProperty('height');
-        element.style.removeProperty('opacity');
-        element.style.removeProperty('transition');
-        element.removeEventListener('transitionend', handler);
-      });
-    }
-
-    function expandSection(element) {
-      element.style.removeProperty('display');
-      let sectionHeight = element.scrollHeight;
-
-      element.style.height = 0;
-      element.style.opacity = 0;
-
-      requestAnimationFrame(() => {
-        element.style.transition = 'height 0.35s ease, opacity 0.35s ease';
-        element.style.height = sectionHeight + 'px';
-        element.style.opacity = 1;
-      });
-
-      element.addEventListener('transitionend', function handler() {
-        element.style.removeProperty('height');
-        element.style.removeProperty('transition');
-        element.removeEventListener('transitionend', handler);
-      });
-    }
-
-    // Optional: open the first section by default
-    if (headers.length > 0) {
-      headers[0].setAttribute('aria-expanded', 'true');
-      expandSection(document.getElementById(headers[0].getAttribute('aria-controls')));
-    }
   });
 </script>
 
 <style>
+  /* Accordion container */
   .accordion {
     max-width: 900px;
-    margin: 2rem auto 3rem;
-    font-family: inherit; /* Use your site's font */
+    margin: 1.5rem auto 3rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
+  /* Each accordion item */
   .accordion-item {
     border: 1px solid #ddd;
     border-radius: 6px;
@@ -141,6 +83,7 @@ layout: default
     box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
   }
 
+  /* Accordion header button */
   .accordion-header {
     width: 100%;
     padding: 16px 24px;
@@ -162,6 +105,7 @@ layout: default
     background: linear-gradient(90deg, #8338ec 0%, #3a86ff 100%);
   }
 
+  /* Accordion icon arrow */
   .accordion-icon {
     transition: transform 0.4s ease;
     stroke: white;
@@ -170,17 +114,31 @@ layout: default
     transform: rotate(180deg);
   }
 
+  /* Accordion content panel */
   .accordion-content {
     padding: 20px 24px;
     font-size: 1rem;
     line-height: 1.6;
     color: #222;
     border-top: 1px solid #ddd;
-    display: none;
-    opacity: 0;
-    overflow: hidden;
+    animation: slideDown 0.4s ease forwards;
   }
 
+  /* Slide down animation */
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      max-height: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      max-height: 1000px;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive */
   @media (max-width: 600px) {
     .accordion-header {
       font-size: 1rem;
