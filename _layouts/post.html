@@ -9,58 +9,87 @@ layout: default
     <p class="post-author">By {{ page.author | default: site.author }}</p>
   </header>
 
-  <section class="post-content">
-    {{ content }}
-  </section>
+  <div class="accordion">
 
-  {% if page.departments_interacted_with %}
-  <section class="post-section">
-    <h3>Departments Interacted With</h3>
-    {{ page.departments_interacted_with | markdownify }}
-  </section>
-  {% endif %}
+    {% if page.departments_interacted_with %}
+    <h3 class="accordion-header">Departments Interacted With</h3>
+    <div class="accordion-content" style="display:none;">
+      {{ page.departments_interacted_with | markdownify }}
+    </div>
+    {% endif %}
 
-  {% if page.what_i_learned %}
-  <section class="post-section">
-    <h3>What I Learned</h3>
-    {{ page.what_i_learned | markdownify }}
-  </section>
-  {% endif %}
+    {% if page.what_i_learned %}
+    <h3 class="accordion-header">What I Learned</h3>
+    <div class="accordion-content" style="display:none;">
+      {{ page.what_i_learned | markdownify }}
+    </div>
+    {% endif %}
 
-  {% if page.what_stood_out %}
-  <section class="post-section">
-    <h3>What Stood Out</h3>
-    {{ page.what_stood_out | markdownify }}
-  </section>
-  {% endif %}
+    {% if page.what_stood_out %}
+    <h3 class="accordion-header">What Stood Out</h3>
+    <div class="accordion-content" style="display:none;">
+      {{ page.what_stood_out | markdownify }}
+    </div>
+    {% endif %}
 
-  {% if page.work_done %}
-  <section class="post-section">
-    <h3>Work Done</h3>
-    {{ page.work_done | markdownify }}
-  </section>
-  {% endif %}
+    {% if page.work_done %}
+    <h3 class="accordion-header">Work Done</h3>
+    <div class="accordion-content" style="display:none;">
+      {{ page.work_done | markdownify }}
+    </div>
+    {% endif %}
 
-  {% if page.questions_raised %}
-  <section class="post-section">
-    <h3>Questions Raised</h3>
-    {{ page.questions_raised | markdownify }}
-  </section>
-  {% endif %}
+    {% if page.questions_raised %}
+    <h3 class="accordion-header">Questions Raised</h3>
+    <div class="accordion-content" style="display:none;">
+      {{ page.questions_raised | markdownify }}
+    </div>
+    {% endif %}
 
-  {% if page.feedback_suggestions %}
-  <section class="post-section">
-    <h3>Feedback & Suggestions</h3>
-    {{ page.feedback_suggestions | markdownify }}
-  </section>
-  {% endif %}
+    {% if page.feedback_suggestions %}
+    <h3 class="accordion-header">Feedback & Suggestions</h3>
+    <div class="accordion-content" style="display:none;">
+      {{ page.feedback_suggestions | markdownify }}
+    </div>
+    {% endif %}
 
-  {% if page.tags %}
-  <footer class="post-tags">
-    <span>Tags:</span>
-    {% for tag in page.tags %}
-      <span class="tag">{{ tag }}</span>
-    {% endfor %}
-  </footer>
-  {% endif %}
+  </div>
 </article>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const headers = document.querySelectorAll('.accordion-header');
+    headers.forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        const isVisible = content.style.display === 'block';
+        // Close all contents
+        document.querySelectorAll('.accordion-content').forEach(c => c.style.display = 'none');
+        // Toggle current
+        content.style.display = isVisible ? 'none' : 'block';
+      });
+    });
+  });
+</script>
+
+<style>
+  .accordion-header {
+    cursor: pointer;
+    padding: 12px 20px;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    user-select: none;
+    font-weight: bold;
+  }
+  .accordion-header:hover {
+    background-color: #e2e2e2;
+  }
+  .accordion-content {
+    padding: 15px 20px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: white;
+  }
+</style>
