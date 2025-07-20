@@ -4,83 +4,21 @@ layout: default
 
 <article class="blog-post">
   <header class="post-header">
+    <p class="post-date">{{ page.date | date: "%B %-d, %Y" }}</p>
     <h1 class="post-title">{{ page.title }}</h1>
-    {% if page.subtitle %}
-      <p class="post-subtitle">{{ page.subtitle }}</p>
-    {% endif %}
-    {% if page.author %}
-      <p class="post-author">By {{ page.author }}</p>
-    {% endif %}
-    {% if page.date %}
-      <p class="post-date">{{ page.date | date: "%B %-d, %Y" }}</p>
-    {% endif %}
+    <p class="post-author">By {{ page.author | default: site.author }}</p>
   </header>
 
-  {% comment %}
-  Render special keys if they exist, using markdownify to format Markdown
-  {% endcomment %}
-  
-  {% if page.project_title %}
+  <section class="post-content">
+    {{ content }}
+  </section>
+
+  {% if page.departments_interacted_with %}
   <section class="post-section">
-    <h3>Project Title</h3>
-    <p>{{ page.project_title }}</p>
+    <h3>Departments Interacted With</h3>
+    {{ page.departments_interacted_with | markdownify }}
   </section>
   {% endif %}
-
-  {% if page.problem %}
-  <section class="post-section">
-    <h3>Problem</h3>
-    {{ page.problem | markdownify }}
-  </section>
-  {% endif %}
-
-  {% if page.approach %}
-  <section class="post-section">
-    <h3>Approach</h3>
-    {{ page.approach | markdownify }}
-  </section>
-  {% endif %}
-
-  {% if page.outcome %}
-  <section class="post-section">
-    <h3>Expected Outcome</h3>
-    {{ page.outcome | markdownify }}
-  </section>
-  {% endif %}
-
-  {% if page.final_report_url %}
-  <p><strong>Final Report:</strong> <a href="{{ page.final_report_url }}" target="_blank">View PDF</a></p>
-  {% endif %}
-
-  {% if page.grad_mentor %}
-  <section class="post-section">
-    <h3>Graduate Student Mentor</h3>
-    <p>
-      {% if page.grad_mentor.linkedin %}
-        <a href="{{ page.grad_mentor.linkedin }}" target="_blank">{{ page.grad_mentor.name }}</a>
-      {% else %}
-        {{ page.grad_mentor.name }}
-      {% endif %}
-    </p>
-  </section>
-  {% endif %}
-
-  {% if page.faculty_mentor %}
-  <section class="post-section">
-    <h3>Faculty Mentor</h3>
-    <p>
-      {% if page.faculty_mentor.linkedin %}
-        <a href="{{ page.faculty_mentor.linkedin }}" target="_blank">{{ page.faculty_mentor.name }}</a>
-      {% else %}
-        {{ page.faculty_mentor.name }}
-      {% endif %}
-    </p>
-  </section>
-  {% endif %}
-
-  {% comment %}
-  Your common special sections like what_i_learned, blockers, reflection
-  {% endcomment %}
 
   {% if page.what_i_learned %}
   <section class="post-section">
@@ -89,25 +27,40 @@ layout: default
   </section>
   {% endif %}
 
-  {% if page.blockers %}
+  {% if page.what_stood_out %}
   <section class="post-section">
-    <h3>Blockers</h3>
-    {{ page.blockers | markdownify }}
+    <h3>What Stood Out</h3>
+    {{ page.what_stood_out | markdownify }}
   </section>
   {% endif %}
 
-  {% if page.reflection %}
+  {% if page.work_done %}
   <section class="post-section">
-    <h3>Reflection</h3>
-    {{ page.reflection | markdownify }}
+    <h3>Work Done</h3>
+    {{ page.work_done | markdownify }}
   </section>
   {% endif %}
 
-  {% comment %}
-  IMPORTANT: Render the raw Markdown content for normal posts
-  {% endcomment %}
+  {% if page.questions_raised %}
   <section class="post-section">
-    {{ content }}
+    <h3>Questions Raised</h3>
+    {{ page.questions_raised | markdownify }}
   </section>
+  {% endif %}
 
+  {% if page.feedback_suggestions %}
+  <section class="post-section">
+    <h3>Feedback & Suggestions</h3>
+    {{ page.feedback_suggestions | markdownify }}
+  </section>
+  {% endif %}
+
+  {% if page.tags %}
+  <footer class="post-tags">
+    <span>Tags:</span>
+    {% for tag in page.tags %}
+      <span class="tag">{{ tag }}</span>
+    {% endfor %}
+  </footer>
+  {% endif %}
 </article>
